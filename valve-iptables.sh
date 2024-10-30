@@ -51,29 +51,3 @@ iptables -A VALVE -t raw -p udp --dport xxxxx -j DROP
 #--------------------------------------------
 ipset add valve_allowed <ip_address>
 Replace <ip_address> with the IP address you want to add to the set.
-
-
-
-
-#--------------------------------------------
-TCP OPTIONS DROP&RATELIMIT
-iptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 1/s -j ACCEPT
-
-
-#--------------------------------------------
-iptables -A INPUT -p tcp --tcp-flags ALL ALL -m limit --limit 1/h -j ACCEPT
-
-#--------------------------------------------
-iptables -A INPUT -p tcp --tcp-flags ALL NONE -m limit --limit 1/h -j ACCEPT
-
-#--------------------------------------------
-iptables -A INPUT -p tcp --syn -m limit --limit 2/s --limit-burst 30 -j ACCEPT
-
-#--------------------------------------------
-iptables -t mangle -A PREROUTING -p tcp ! --syn -m conntrack --ctstate NEW -j DROP
-
-#--------------------------------------------
-iptables -t mangle -A PREROUTING -m conntrack --ctstate INVALID -j DROP
-
-#--------------------------------------------
-iptables-save
