@@ -23,3 +23,12 @@ iptables -A VALVE -t raw -p udp ! --sport 53 -m hashlimit --hashlimit-upto 7/sec
 iptables -A VALVE -t raw -m set ! --match-set valve_allowed src -j DROP
 
 echo "VALVE RULE SET HAS BEEN SUCCESSFULLY DONE"
+
+#--------------------------------------------
+
+!!!!!!!!!!!!!!!                  WARNING                    !!!!!!!!!!!!!!!!!!!
+
+This article is for educational purposes only, the author is not responsible for their misuse by unauthorized persons.
+
+best regards,
+Arlind Rexha
